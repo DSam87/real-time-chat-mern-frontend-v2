@@ -12,7 +12,7 @@ function ChatBoxForm() {
         ></input>
       </div>
       <div className="flex justify-center items-center text-input w-[20%] h-[100%] ">
-        <button className="text-white rounded-md uppercase text-xl bg-emerald-900 h-[60%] w-[85%] tracking-widest  hover:bg-emerald-900 hover:rounded-2xl transition-all duration-300">
+        <button className="text-white rounded-md uppercase text-xl bg-indigo-950 h-[60%] w-[85%] tracking-widest  hover:bg-indigo-900 hover:rounded-2xl transition-all duration-300">
           Post
         </button>
       </div>
