@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAddNewUserMutation } from "../../features/user/userSlice";
 
 function Signup() {
   const navigate = useNavigate();
-
-  const { formValues, setFormValues } = useState();
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -20,13 +18,17 @@ function Signup() {
       e.preventDefault();
       const prom = await singup({ username, email, password });
       console.log(prom);
-      // navigate("/dash");
     }
   }
 
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/dashboard");
+    }
+  }, [isSuccess, navigate]);
+
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-
     switch (name) {
       case "username":
         setUsername(value);

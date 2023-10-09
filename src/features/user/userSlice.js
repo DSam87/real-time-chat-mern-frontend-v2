@@ -38,6 +38,14 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, arg) => [{ type: "User", id: "LIST" }],
     }),
+    loginUser: builder.mutation({
+      query: (loginData) => ({
+        url: "/login",
+        method: "POST",
+        body: { ...loginData },
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: "User", id: "LIST" }],
+    }),
   }),
 });
 
@@ -58,4 +66,5 @@ export const {
   (state) => selectUsersData(state) ?? initialState
 );
 
-export const { useGetUsersQuery, useAddNewUserMutation } = usersApiSlice;
+export const { useGetUsersQuery, useAddNewUserMutation, useLoginUserMutation } =
+  usersApiSlice;

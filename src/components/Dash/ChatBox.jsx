@@ -1,7 +1,8 @@
 import React from "react";
 import ChatBoxForm from "./ChatBoxForm";
+import { selectAllPosts } from "../../features/post/postSlice";
 
-function ChatBox() {
+function ChatBox({ userId }) {
   return (
     <div className="w-[75%] h-[100%]  flex-auto  flex-grow-0">
       <div className="flex  flex-col-reverse post-item-container w-[100%] h-[90%] max-h-[90%]  overflow-auto flex-grow-0 pl-5 pt-5">
@@ -85,7 +86,7 @@ function ChatBox() {
         </div>
       </div>
 
-      <ChatBoxForm />
+      <ChatBoxForm userId={userId} />
     </div>
   );
 }
