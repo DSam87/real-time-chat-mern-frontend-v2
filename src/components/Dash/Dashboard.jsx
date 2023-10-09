@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import ChatBox from "./ChatBox";
 import SideNav from "./SideNav";
-import { useVerifyUserMutation } from "../../features/auth/authSlice";
-import { useGetPostsQuery } from "../../features/post/postSlice";
+import { useVerifyUserMutation } from "../../app/api/apiSlice";
 
 function Dashboard() {
   const navigate = useNavigate();
   const [cookies, removeCookies] = useCookies([]);
   const [userId, setUserId] = useState("");
+  const [username, setUsername] = useState("");
   const [cookieVerified, setCookieVarified] = useState(false);
 
   const [verifyUser, { isLoading, isSuccess, isError, error, isFetching }] =
@@ -29,6 +29,7 @@ function Dashboard() {
       console.log("data");
       console.log(data);
       setUserId(data.id);
+      setUsername(data.username);
       setCookieVarified(true);
     };
     verifyCookie();
@@ -45,8 +46,8 @@ function Dashboard() {
       {cookieVerified ? (
         <>
           {" "}
-          <SideNav logoutHandler={Logout} userId={userId} />
-          <ChatBox userId={userId} />
+          <SideNav logoutHandler={Logout} userId={userId} username={username} />
+          <ChatBox userId={userId} username={username} />
         </>
       ) : (
         <div role="status" className="absolute !z-50 !opacity-100">
