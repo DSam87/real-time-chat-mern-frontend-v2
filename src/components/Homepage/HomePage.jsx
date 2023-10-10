@@ -6,7 +6,7 @@ const HomePage = () => {
   const navigate = useNavigate();
   return (
     <div className="flex flex-col justify-center items-center align-middle w-[70%] ">
-      {/* <Ball /> */}
+      <Ball />
       <h1 className="text-white text-center text-4xl tracking-[16px] uppercase opacity-90 pb-[40px] md:w-full ">
         Real Time Chat
       </h1>
