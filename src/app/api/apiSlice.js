@@ -4,7 +4,7 @@ export const apiSlice = createApi({
   reducerPath: "api",
   tagTypes: ["Post"],
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://fullstack-chat-api.onrender.com",
+    baseUrl: "http://localhost:3500",
     credentials: "include",
   }),
   endpoints: (builder) => ({
