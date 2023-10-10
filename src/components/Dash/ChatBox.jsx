@@ -1,35 +1,19 @@
 import React, { useMemo } from "react";
 import ChatBoxForm from "./ChatBoxForm";
-// import { useGetPostsQuery } from "../../features/post/postSlice";
 import ChatBubble from "./ChatBubble";
 import { useGetPostsQuery } from "../../app/api/apiSlice";
 import SpinComponent from "../../utilComponents/SpinComponent";
 import classNames from "classnames";
 
 function ChatBox({ userId, username }) {
-  // const {
-  //   data: items,
-  //   isLoading: postsIsLoading,
-  //   isError: postsIsError,
-  //   error: postsError,
-  //   isSuccess: postsIsSuccess,
-  //   isFetching: postsIsFetching,
-  // } = useGetPostsQuery(undefined, {});
-
-  // pollingInterval: 10000,
-  // refetchOnFocus: true,
-  // refetchOnMountOrArgChange: true,
-
   const {
     data: posts = [],
     isLoading,
     isSuccess,
     isFetching,
     isError,
-    error,
-    refetch,
   } = useGetPostsQuery(undefined, {
-    // pollingInterval: 15000,
+    pollingInterval: 4000,
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
   });

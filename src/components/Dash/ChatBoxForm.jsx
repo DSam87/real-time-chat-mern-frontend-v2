@@ -33,6 +33,7 @@ function ChatBoxForm({ userId, username, key }) {
     >
       <div className="text-input w-[80%] h-[100%]  flex justify-center items-center">
         <input
+          autoComplete="off"
           onChange={onChangeHandler}
           value={text}
           type="text"

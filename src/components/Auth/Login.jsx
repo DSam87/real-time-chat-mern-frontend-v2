@@ -3,16 +3,26 @@ import { useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "../../app/api/apiSlice";
 function Login() {
   const navigate = useNavigate();
-
-  const [login, { isSuccess, isLoading, error, isError, isFetching }] =
-    useLoginUserMutation();
+  const [canSave, setCanSave] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    let regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+    let passwordGood = password.length > 2;
+    let emailGood = regex.test(email);
+
+    setCanSave(passwordGood && emailGood);
+  }, [email, password]);
+
+  const [login, { isSuccess, isLoading, error, isError, isFetching }] =
+    useLoginUserMutation();
+
   async function handleSubmit(e) {
-    if (!isFetching) {
-      e.preventDefault();
+    e.preventDefault();
+
+    if (!isFetching && canSave) {
       const prom = await login({ email, password });
       console.log(prom);
     }
@@ -66,7 +76,7 @@ function Login() {
           <span class="sr-only">Loading...</span>
         </div>
       ) : null}
-      <form className={``} onSubmit={handleSubmit}>
+      <form className={``} onSubmit={(e) => e.preventDefault()}>
         <label
           htmlFor="email"
           className="tracking-[4px] text-l	 text-white uppercase"
@@ -81,6 +91,7 @@ function Login() {
           className="mb-4 bg-purple-100 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           onChange={handleOnChange}
           value={email}
+          required
         />
 
         <label
@@ -97,14 +108,19 @@ function Login() {
           className=" mb-4 bg-purple-100 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           onChange={handleOnChange}
           value={password}
+          required
         />
 
         <div className="flex flex-col flex-auto gap-3">
           <button
-            onClick={() => {
-              // navigate("/");
+            onClick={(e) => {
+              if (!isFetching && !isLoading && canSave) {
+                handleSubmit(e);
+              }
             }}
-            className="hover:scale-105 hover:bg-emerald-500 duration-300 transform transition rounded-full bg-emerald-400 bg-opacity-100 opacity-90 border-solid border-0 border-emerald-700 w-80 h-16 tracking-[7px] text-xl	 text-white uppercase "
+            className={` ${
+              !canSave && "opacity-50 cursor-not-allowed"
+            } hover:scale-105 hover:bg-emerald-500 duration-300 transform transition rounded-full bg-emerald-400 bg-opacity-100 opacity-90 border-solid border-0 border-emerald-700 w-80 h-16 tracking-[7px] text-xl	 text-white uppercase `}
           >
             Login
           </button>

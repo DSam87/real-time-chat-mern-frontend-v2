@@ -9,13 +9,27 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [canSave, setCanSave] = useState(false);
 
-  const [singup, { isLoading, isSuccess, isError, error, isFetching }] =
+  useEffect(() => {
+    let regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+    let passwordGood =
+      password === passwordConfirmation &&
+      password.length > 2 &&
+      passwordConfirmation.length > 2;
+    let usernameGood = !(username.indexOf(" ") >= 0) && username.length >= 3;
+    let emailGood = regex.test(email);
+
+    setCanSave(passwordGood && usernameGood && emailGood);
+  }, [username, email, password, passwordConfirmation]);
+
+  const [singup, { isLoading, isSuccess, isFetching }] =
     useAddNewUserMutation();
 
   async function handleSubmit(e) {
+    e.preventDefault();
+
     if (!isFetching) {
-      e.preventDefault();
       const prom = await singup({ username, email, password });
       console.log(prom);
     }
@@ -75,10 +89,7 @@ function Signup() {
           <span class="sr-only">Loading...</span>
         </div>
       ) : null}
-      <form
-        className={`${isFetching ? "opacity-60" : "opacity-100"}`}
-        onSubmit={handleSubmit}
-      >
+      <form className={`${isFetching ? "opacity-60" : "opacity-100"}`}>
         <label
           className="tracking-[4px] text-l text-white uppercase"
           htmlFor="username"
@@ -93,6 +104,7 @@ function Signup() {
           className=" mb-4 bg-purple-100 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           onChange={handleOnChange}
           value={username}
+          required
         />
 
         <label
@@ -108,6 +120,7 @@ function Signup() {
           name="email"
           className=" mb-4 bg-purple-100 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           onChange={handleOnChange}
+          required
           value={email}
         />
 
@@ -125,6 +138,7 @@ function Signup() {
           className=" mb-4 bg-purple-100 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           onChange={handleOnChange}
           value={password}
+          required
         />
 
         <label
@@ -141,16 +155,19 @@ function Signup() {
           className=" mb-4 bg-purple-100 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           onChange={handleOnChange}
           value={passwordConfirmation}
+          required
         />
 
-        <div className="flex flex-col flex-auto gap-3">
+        <div className={`flex flex-col flex-auto gap-3 `}>
           <button
             onClick={(e) => {
-              if (!isFetching) {
+              if (!isFetching && !isLoading && canSave) {
                 handleSubmit(e);
               }
             }}
-            className="hover:scale-105 hover:bg-emerald-500 duration-300 transform transition rounded-full bg-emerald-400 bg-opacity-100 opacity-90 border-solid border-0 border-emerald-700 w-80 h-16 tracking-[7px] text-xl	 text-white uppercase "
+            className={`${
+              !canSave && "opacity-50 cursor-not-allowed"
+            } hover:scale-105 hover:bg-emerald-500 duration-300 transform transition rounded-full bg-emerald-400 bg-opacity-100 opacity-90 border-solid border-0 border-emerald-700 w-80 h-16 tracking-[7px] text-xl	 text-white uppercase `}
           >
             Signup
           </button>
