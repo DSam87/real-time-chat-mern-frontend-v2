@@ -5,7 +5,10 @@ import "./index.css";
 import store from "./app/store";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { useToast } from "react-toastify";
+
+import { disableReactDevTools } from "@fvilers/disable-react-devtools";
+
+if (ProcessingInstruction.env.NODE_ENV === "production") disableReactDevTools();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
