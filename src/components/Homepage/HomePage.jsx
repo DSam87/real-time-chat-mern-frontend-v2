@@ -42,8 +42,7 @@ const HomePage = () => {
         Real Time Chat
       </h1>
       <p className="text-white text-xl tracking-[12px] text-center uppercase opacity-90 pb-[50px]">
-        A quick and responsive full stack application for messageing, liking
-        posts and making friends.
+        A quick and responsive full stack application for messageing, and making friends.
       </p>
       <div className="flex flex-col justify-center gap-8  w-full md:flex-row">
         <button
