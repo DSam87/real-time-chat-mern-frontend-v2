@@ -14,7 +14,7 @@ function ChatBox({ username }) {
     isFetching,
     isError,
   } = useGetPostsQuery(undefined, {
-    pollingInterval: 40000,
+    pollingInterval: 4000,
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
   });
@@ -29,7 +29,6 @@ function ChatBox({ username }) {
     }
 
   }, [posts])
-
 
   let content;
 
