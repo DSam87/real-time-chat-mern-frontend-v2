@@ -4,7 +4,7 @@ export const apiSlice = createApi({
   reducerPath: "api",
   tagTypes: ["Post"],
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3500",
+    baseUrl: "https://real-time-chat-mern-api.onrender.com",
     credentials: "include",
   }),
   endpoints: (builder) => ({

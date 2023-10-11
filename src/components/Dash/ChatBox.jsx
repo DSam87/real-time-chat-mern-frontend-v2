@@ -28,7 +28,7 @@ function ChatBox({ userId, username }) {
   if (isLoading) {
     content = <SpinComponent />;
   } else if (isSuccess) {
-    const containerClassname = classNames({ "opacity-90": isFetching });
+    const containerClassname = classNames({ "": isFetching });
 
     const renderedPosts = reversedPosts.map((post, index) => (
       <ChatBubble
