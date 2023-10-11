@@ -62,7 +62,7 @@ function ChatBox({ username }) {
         initial={{ opacity: 0, translateY: -100  }}
         animate={{ translateY: 0 , opacity:100}} 
         transition={{ delay: .8, duration: 1 }}
-        className="flex  flex-col post-item-container w-[100%] h-[90%] max-h-[90%]  overflow-auto flex-grow-0 pl-5 pt-5"
+        className="flex  flex-col post-item-container w-[100%] h-[90%] max-h-[90%]  overflow-auto flex-grow-0 pl-0 md:pl-5 pt-5"
       >
         {content}
         <div name="bottomInsideContainer" ref={refBottom}></div>
