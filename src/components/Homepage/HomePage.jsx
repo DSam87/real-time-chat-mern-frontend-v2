@@ -15,7 +15,7 @@ const HomePage = () => {
   useEffect(() => {
     const verifyCookie = async () => {
       const { data } = await verifyUser();
-      if(data.id && data.username){
+      if(data?.id && data?.username){
         navigate("/dashboard")
       }
     };
