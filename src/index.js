@@ -12,7 +12,6 @@ if (process.env.NODE_ENV === "production") disableReactDevTools();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
         <div className="flex flex-auto flex-col justify-center items-center align-middle h-screen w-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-500 to-purple-900">
@@ -20,5 +19,4 @@ root.render(
         </div>
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>
 );

@@ -4,7 +4,8 @@ export const apiSlice = createApi({
   reducerPath: "api",
   tagTypes: ["Post"],
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://real-time-chat-api-b8kz.onrender.com",
+    // baseUrl: "https://real-time-chat-api-b8kz.onrender.com",
+    baseUrl: "http://localhost:3500",
     credentials: "include",
   }),
   endpoints: (builder) => ({
@@ -12,13 +13,7 @@ export const apiSlice = createApi({
       query: () => "/posts",
       providesTags: ["Post"],
     }),
-    verifyUser: builder.mutation({
-      query: (userData) => ({
-        url: "/",
-        method: "POST",
-        body: { ...userData },
-      }),
-    }),
+
     addPost: builder.mutation({
       query: (postData) => ({
         url: "/post",
@@ -27,36 +22,10 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Post"],
     }),
-    deleteUser: builder.mutation({
-      query: (userId) => ({
-        url: "/delete-user",
-        method: "POST",
-        body: { ...userId },
-      }),
-    }),
-    addNewUser: builder.mutation({
-      query: (newUserData) => ({
-        url: "/signup",
-        method: "POST",
-        body: { ...newUserData },
-      }),
-      invalidatesTags: (result, error, arg) => [{ type: "User", id: "LIST" }],
-    }),
-    loginUser: builder.mutation({
-      query: (loginData) => ({
-        url: "/login",
-        method: "POST",
-        body: { ...loginData },
-      }),
-    }),
   }),
 });
 
 export const {
   useGetPostsQuery,
-  useVerifyUserMutation,
   useAddPostMutation,
-  useDeleteUserMutation,
-  useAddNewUserMutation,
-  useLoginUserMutation,
 } = apiSlice;

@@ -3,24 +3,11 @@ import Ball from "./Ball";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion"
 import { useCookies } from "react-cookie";
-import { useVerifyUserMutation } from "../../app/api/apiSlice";
+// import { useVerifyUserMutation } from "../../app/api/apiSlice";
 
 const HomePage = () => {
   const navigate = useNavigate();
   const [cookies, removeCookies] = useCookies([]);
-
-  const [verifyUser, { isLoading, isSuccess, isError, error, isFetching }] =
-    useVerifyUserMutation();
-
-  useEffect(() => {
-    const verifyCookie = async () => {
-      const { data } = await verifyUser();
-      if(data?.id && data?.username){
-        navigate("/dashboard")
-      }
-    };
-    verifyCookie();
-  }, [cookies, navigate, removeCookies]);
 
   return (
     <div className="flex flex-col justify-center items-center align-middle w-[70%]">
@@ -47,19 +34,11 @@ const HomePage = () => {
       <div className="flex flex-col justify-center gap-8  w-full md:flex-row">
         <button
           onClick={() => {
-            navigate("/login");
+            navigate("/dashboard");
           }}
           className="hover:scale-105 flex-auto flex-grow-0 hover:bg-emerald-500 duration-300 transform transition rounded-full bg-emerald-400 bg-opacity-100 opacity-90 border-solid border-0 border-emerald-700 sm:w-full md:w-80 h-16 tracking-[7px] text-xl text-white uppercase "
         >
-          Login
-        </button>
-        <button
-          onClick={() => {
-            navigate("/signup");
-          }}
-          className="hover:scale-105 flex-auto flex-grow-0 hover:bg-emerald-500 duration-300 transform transition rounded-full bg-emerald-400 bg-opacity-100 opacity-90 border-solid border-0 border-emerald-700  sm:w-full md:w-80 h-16 tracking-[7px] text-xl	 text-white uppercase "
-        >
-          Signup
+          Start Posting
         </button>
       </div>
       </motion.div>

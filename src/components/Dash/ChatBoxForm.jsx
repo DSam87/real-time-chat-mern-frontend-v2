@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-// import { useAddPostMutation } from "../../features/post/postSlice";
 import { useAddPostMutation } from "../../app/api/apiSlice";
+import { motion } from "framer-motion";
 
-function ChatBoxForm({ userId, username, key }) {
-  console.log(key);
-  // const [addPost, { isLoading, isFetching, isSuccess, isError, error }] =
-  //   useAddPostMutation();
+function ChatBoxForm({ key }) {
+ 
 
   const [addPost, { isSuccess, isFetching }] = useAddPostMutation();
   const [text, setText] = useState("");
-
+  const [username, setUsername] = useState("");
   function onChangeHandler(e) {
     setText(e.target.value);
+  }
+
+  function onUsernameHndler(e){
+    setUsername(e.target.value)
   }
 
   async function submitHandler(e) {
@@ -26,12 +28,33 @@ function ChatBoxForm({ userId, username, key }) {
   }
 
   return (
-    <form
+    <motion.form
+      initial={{opacity: 0, translateY: 100}}
+      animate={{ opacity: 100, translateY: 0}}
+      transition={{
+        duration: 2,
+        type: "spring",
+        stiffness: 260,
+        damping: 20,
+        delay: 0.2, 
+      }}
+      
       key={key}
-      className="flex items-center j post-item-container w-[100%] h-[10%] max-h-[10%]  flex-grow-0  "
+      className="flex items-center justify-center post-item-container w-[100%] h-[10%] max-h-[10%]  flex-grow-0  "
       onSubmit={submitHandler}
     >
-      <div className="text-input w-[80%] h-[100%]  flex justify-center items-center">
+        <div className="text-input w-[10%] h-[100%]  flex justify-center items-center">
+          <input
+          autoComplete="off"
+          onChange={onUsernameHndler}
+          value={username}
+          type="text"
+          className="w-[95%] h-[60%] rounded-2xl pl-6 text-2xl"
+          name="username"
+          placeholder="name"
+        ></input>
+      </div>
+      <div className="text-input w-[65%] h-[100%]  flex justify-center items-center">
         <input
           autoComplete="off"
           onChange={onChangeHandler}
@@ -39,7 +62,7 @@ function ChatBoxForm({ userId, username, key }) {
           type="text"
           className="w-[95%] h-[60%] rounded-2xl pl-6 text-2xl"
           name="post"
-          placeholder="Start talking here!"
+          placeholder="Start posting here!"
         ></input>
       </div>
       <div className="flex justify-center items-center text-input w-[20%] h-[100%] ">
@@ -47,7 +70,7 @@ function ChatBoxForm({ userId, username, key }) {
           Post
         </button>
       </div>
-    </form>
+    </motion.form>
   );
 }
 

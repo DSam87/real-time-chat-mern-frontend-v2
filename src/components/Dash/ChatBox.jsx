@@ -1,11 +1,14 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect,useRef } from "react";
 import ChatBoxForm from "./ChatBoxForm";
 import ChatBubble from "./ChatBubble";
 import { useGetPostsQuery } from "../../app/api/apiSlice";
 import SpinComponent from "../../utilComponents/SpinComponent";
 import classNames from "classnames";
+import { motion } from "framer-motion";
+import Scroll from 'react-scroll';
+import { Link, Button, Element, Events, animateScroll as scroll, scrollSpy } from 'react-scroll';
 
-function ChatBox({ userId, username }) {
+function ChatBox({ username }) {
   const {
     data: posts = [],
     isLoading,
@@ -13,15 +16,27 @@ function ChatBox({ userId, username }) {
     isFetching,
     isError,
   } = useGetPostsQuery(undefined, {
-    pollingInterval: 4000,
+    pollingInterval: 40000,
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
   });
+  const refBottom = useRef()
+
+  useEffect(()=>{
+    if(posts.length){
+      refBottom.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "end"
+      })
+    }
+
+  }, [posts])
+
 
   let content;
 
   const reversedPosts = useMemo(() => {
-    const reversedPosts = posts.slice().reverse();
+    const reversedPosts = posts.slice();
     return reversedPosts;
   }, [posts]);
 
@@ -45,10 +60,16 @@ function ChatBox({ userId, username }) {
 
   return (
     <div className="w-[75%] h-[100%]  flex-auto  flex-grow-0">
-      <div className="flex  flex-col-reverse post-item-container w-[100%] h-[90%] max-h-[90%]  overflow-auto flex-grow-0 pl-5 pt-5">
+      <motion.div 
+        initial={{ opacity: 0, translateY: -100  }}
+        animate={{ translateY: 0 , opacity:100}} 
+        transition={{ delay: .8, duration: 1 }}
+        className="flex  flex-col post-item-container w-[100%] h-[90%] max-h-[90%]  overflow-auto flex-grow-0 pl-5 pt-5"
+      >
         {content}
-      </div>
-      <ChatBoxForm userId={userId} username={username} />
+        <div name="bottomInsideContainer" ref={refBottom}></div>
+      </motion.div>
+      <ChatBoxForm username={username} />
     </div>
   );
 }

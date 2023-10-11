@@ -1,6 +1,6 @@
 import React from "react";
-
-function ChatBubble({ post, containerClassname }) {
+import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+function ChatBubble({ post, containerClassname, lastElement }) {
   const dateString = post.time.toString();
   const fields = dateString.split("T");
   const theDate = fields[0];
