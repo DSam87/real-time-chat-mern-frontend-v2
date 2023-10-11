@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAddNewUserMutation } from "../../app/api/apiSlice";
+import { motion } from "framer-motion";
 
 function Signup() {
   const navigate = useNavigate();
@@ -64,7 +65,11 @@ function Signup() {
   };
 
   return (
-    <>
+    <motion.div className="" 
+    initial={{ opacity: 0 }}
+    animate={{ opacity:100}} 
+    transition={{ duration: 1 }}
+  >
       <h2 className="text-white text-center text-4xl tracking-[14px] uppercase pb-8 opacity-80 align-middle">
         Signup
       </h2>
@@ -184,7 +189,7 @@ function Signup() {
           </button>
         </div>
       </form>
-    </>
+    </motion.div>
   );
 }
 

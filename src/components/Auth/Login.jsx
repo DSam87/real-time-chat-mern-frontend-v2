@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "../../app/api/apiSlice";
+import { motion } from "framer-motion"
+
 function Login() {
   const navigate = useNavigate();
   const [canSave, setCanSave] = useState(false);
@@ -51,7 +53,11 @@ function Login() {
   };
 
   return (
-    <>
+    <motion.div className="" 
+    initial={{ opacity: 0 }}
+    animate={{ opacity:100}} 
+    transition={{ duration: 1 }}
+  >
       <h2 className="text-white text-4xl text-center tracking-[14px] uppercase pb-8 opacity-80 align-middle">
         Login
       </h2>
@@ -135,7 +141,7 @@ function Login() {
           </button>
         </div>
       </form>
-    </>
+    </motion.div>
   );
 }
 

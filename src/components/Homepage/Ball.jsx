@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Spline from "@splinetool/react-spline";
+import Spline from '@splinetool/react-spline';
+
+
 
 function Ball() {
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
@@ -28,7 +30,7 @@ function Ball() {
       {screenSize.width < 1180 ? (
         ""
       ) : (
-        <Spline scene="https://prod.spline.design/QnYwQ-mJEy-ADJD8/scene.splinecode" />
+        <Spline scene="https://prod.spline.design/QnYwQ-mJEy-ADJD8/scene.splinecode" /> 
       )}
     </div>
   );
