@@ -5,8 +5,6 @@ import { useGetPostsQuery } from "../../app/api/apiSlice";
 import SpinComponent from "../../utilComponents/SpinComponent";
 import classNames from "classnames";
 import { motion } from "framer-motion";
-import Scroll from 'react-scroll';
-import { Link, Button, Element, Events, animateScroll as scroll, scrollSpy } from 'react-scroll';
 
 function ChatBox({ username }) {
   const {
