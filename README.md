@@ -29,9 +29,8 @@ This project's front-end and back-end have both been deployed on <a href="https:
 
 ## App Features
 <ul>
-  <li>No authintification needed.</li>
   <li>Post with others live in the chat room</li>
-  <li>Post Anonomosly or with a username</li>
+  <li>Post anonymously or with a username</li>
   <li>Redux and RTK query for Automated Refetching, Polling and Caching</li>
   <li>Animations made with framer-motion</li>
 </ul>
