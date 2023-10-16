@@ -9,9 +9,14 @@ A quick and responsive full stack application for messaging and making friends. 
 ## Live Example 
 This project's front-end and back-end have both been deployed on <a href="https://render.com/" target="_blank">onrender.com</a> to give a live example of the project.
 <br/>
-<a href="https://real-time-chat-sfg3.onrender.com" target="_blank">LIVE EXAMPLE </a> (real-time-chat-sfg3.onrender.com)
 
 <ul>
+  <h4>Live</h4>
+  <ul>
+    <li>Onrender.com</li>
+    <li><a href="https://real-time-chat-sfg3.onrender.com" target="_blank">LIVE EXAMPLE </a> (real-time-chat-sfg3.onrender.com)</li>
+  </ul>
+  
   <h4>Front-end</h4>
   <ul>
     <li>Github repo</li>
